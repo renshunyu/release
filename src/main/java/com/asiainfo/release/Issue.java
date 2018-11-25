@@ -33,6 +33,7 @@ public class Issue {
         }
         int productVersionId = ProductVersion.getVersionId(IConfig.getInstance().getByKey("versionNum"));
         //获取描述信息
+        IConfig.getInstance().getProperties().load(ClassLoader.getSystemResourceAsStream("iap.properties"));
 
         File file;
         File[] files;
@@ -52,7 +53,7 @@ public class Issue {
                 logger.info(uploadFileResponse.getPath());
                 //System.out.println(tf.getAbsolutePath());
                 installPackAreasInfos.add(new InstallPackAreasInfo(tf.getName(), URLDecoder.decode(uploadFileResponse.getPath(), "UTF-8"), new String(IConfig.getInstance().getByKey("installVersion").getBytes("iso-8859-1"), "UTF-8")));
-                installPackInfos.add(new InstallPackInfo(tf.getName(), tf.getAbsolutePath(), installPackAreasInfos));
+                installPackInfos.add(new InstallPackInfo(tf.getName(), new String(IConfig.getInstance().getByKey(new String(tf.getName().getBytes("UTF-8"),"iso-8859-1"),"").getBytes("iso-8859-1"), "UTF-8"), installPackAreasInfos));
             }
         }
         //添加安装包信息
@@ -72,7 +73,7 @@ public class Issue {
         for (File tf : files) {
             if (tf.isFile()) {
                 UploadFileResponse uploadFileResponse = UploadFile.upload(tf, IConfig.getInstance().getByKey("changeDescriptionInfoPath"));
-                changeDescriptionInfos.add(new ChangeDescriptionInfo(tf.getName(), URLDecoder.decode(uploadFileResponse.getPath(), "UTF-8"), tf.getAbsolutePath()));
+                changeDescriptionInfos.add(new ChangeDescriptionInfo(tf.getName(), URLDecoder.decode(uploadFileResponse.getPath(), "UTF-8"), new String(IConfig.getInstance().getByKey(new String(tf.getName().getBytes("UTF-8"),"iso-8859-1"),"").getBytes("iso-8859-1"), "UTF-8")));
             }
         }
         if (changeDescriptionInfos.size() > 0) {
@@ -91,7 +92,7 @@ public class Issue {
         for (File tf : files) {
             if (tf.isFile()) {
                 UploadFileResponse uploadFileResponse = UploadFile.upload(tf, IConfig.getInstance().getByKey("manualInfoPath"));
-                manualInfos.add(new ManualInfo(tf.getName(), URLDecoder.decode(uploadFileResponse.getPath(), "UTF-8"), tf.getAbsolutePath()));
+                manualInfos.add(new ManualInfo(tf.getName(), URLDecoder.decode(uploadFileResponse.getPath(), "UTF-8"), new String(IConfig.getInstance().getByKey(new String(tf.getName().getBytes("UTF-8"),"iso-8859-1"),"").getBytes("iso-8859-1"), "UTF-8")));
             }
         }
         if (manualInfos.size() > 0) {

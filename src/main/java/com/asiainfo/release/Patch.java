@@ -41,7 +41,7 @@ public class Patch {
         for (File tf : files) {
             if (tf.isFile()) {
                 UploadFileResponse uploadFileResponse = UploadFile.upload(tf, IConfig.getInstance().getByKey("fixPackInfoPath"));
-                fixPackInfos.add(new FixPackInfo(tf.getName(), "", URLDecoder.decode(uploadFileResponse.getPath(), "UTF-8"), ""));
+                fixPackInfos.add(new FixPackInfo(tf.getName(), new String(IConfig.getInstance().getByKey("fixDescription","").getBytes("iso-8859-1"), "UTF-8"), URLDecoder.decode(uploadFileResponse.getPath(), "UTF-8"), new String(IConfig.getInstance().getByKey("fixRemark","").getBytes("iso-8859-1"), "UTF-8")));
             }
         }
         if (fixPackInfos.size()>0){
