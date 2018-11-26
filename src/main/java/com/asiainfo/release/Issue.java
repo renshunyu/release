@@ -18,7 +18,7 @@ import static java.lang.System.exit;
 public class Issue {
     private static Logger logger = Logger.getLogger(Issue.class);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         if (!IConfig.setConfig(args)) {
             exit(1);
         }

@@ -19,7 +19,7 @@ import static java.lang.System.exit;
 
 public class Patch {
     private static Logger logger = Logger.getLogger(Patch.class);
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         if (!IConfig.setConfig(args)) {
             logger.error("参数错误！");
             exit(1);
