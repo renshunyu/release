@@ -50,7 +50,7 @@ public class ProductVersion {
         createVersionInfo.setIsWhole(1);
         createVersionInfo.setProductName(new String(IConfig.getInstance().getByKey("productName").getBytes("iso-8859-1"), "UTF-8"));
         createVersionInfo.setVersionNum(ver);
-        createVersionInfo.setProductDescription("");
+        createVersionInfo.setProductDescription(new String(IConfig.getInstance().getByKey("productDescription","").getBytes("iso-8859-1"), "UTF-8"));
         Gson gson = new Gson();
         logger.info(gson.toJson(createVersionInfo));
         StringEntity stringEntity = new StringEntity(gson.toJson(createVersionInfo), "UTF-8");
